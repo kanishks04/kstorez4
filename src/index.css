@@ -1,0 +1,185 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* KSStorez Design System - Stormy Morning Theme for College Students */
+
+@layer base {
+  :root {
+    /* Core Brand Colors */
+    --background: 0 0% 100%;
+    --foreground: 209 26% 29%;        /* Deep charcoal blue */
+    
+    /* Stormy Morning Brand Palette */
+    --primary: 211 79% 74%;           /* Bright pastel blue #88BDF2 for CTAs */
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 211 88% 87%;     /* Light sky blue #BDDDFC backgrounds */
+    
+    /* Card & Surface Colors */
+    --card: 0 0% 100%;
+    --card-foreground: 209 26% 29%;   /* Deep charcoal blue */
+    --card-border: 211 23% 85%;       /* Lighter border variant */
+    
+    /* Interactive Elements */
+    --secondary: 209 23% 53%;         /* Soft blue-gray #6A89A7 for secondary */
+    --secondary-foreground: 0 0% 100%;
+    
+    --muted: 211 88% 95%;             /* Very light sky blue for subtle backgrounds */
+    --muted-foreground: 209 23% 53%;  /* Soft blue-gray for muted text */
+    
+    --accent: 211 88% 87%;            /* Light sky blue #BDDDFC for accents */
+    --accent-foreground: 209 26% 29%; /* Deep charcoal blue */
+    
+    /* States */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    /* Borders & Inputs */
+    --border: 211 23% 85%;            /* Light border using stormy morning palette */
+    --input: 211 23% 85%;
+    --ring: 211 79% 74%;              /* Primary blue for focus rings */
+    
+    /* Stormy Morning Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(211 79% 74%), hsl(209 23% 53%));
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%), hsl(211 88% 95%));
+    
+    /* Stormy Morning Shadows */
+    --shadow-card: 0 4px 6px -1px hsl(209 26% 29% / 0.1), 0 2px 4px -1px hsl(209 26% 29% / 0.06);
+    --shadow-button: 0 1px 3px 0 hsl(211 79% 74% / 0.3);
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+}
+
+/* Custom Components & Utilities */
+@layer components {
+  /* Hero section styling */
+  .hero-gradient {
+    background: var(--gradient-hero);
+  }
+  
+  /* Card variants */
+  .card-elevated {
+    box-shadow: var(--shadow-card);
+    @apply bg-card border border-border rounded-lg;
+  }
+  
+  .card-product {
+    @apply card-elevated transition-all duration-300 hover:shadow-lg hover:scale-[1.02];
+  }
+  
+  /* Button variants */
+  .btn-primary {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90 
+           shadow-[var(--shadow-button)] transition-all duration-200
+           hover:shadow-lg hover:scale-[1.02];
+  }
+  
+  .btn-secondary {
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary/80
+           border border-border transition-all duration-200;
+  }
+  
+  /* Animation utilities */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out;
+  }
+  
+  /* Hover effects */
+  .hover-lift {
+    @apply transition-all duration-200 hover:scale-[1.02] hover:shadow-lg;
+  }
+}
+
+@layer utilities {
+  /* Custom keyframes */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
