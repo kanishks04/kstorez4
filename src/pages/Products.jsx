@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Search, Filter, Grid, List } from 'lucide-react';
 import ProductCard from '@/components/ProductCard';
-import { Product } from '@/contexts/CartContext';
 import { apiService } from '@/services/api';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -13,15 +12,15 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 
-const Products: React.FC = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
-  const [categories, setCategories] = useState<string[]>([]);
+const Products = () => {
+  const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  const [sortBy, setSortBy] = useState<string>('default');
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [sortBy, setSortBy] = useState('default');
 
   useEffect(() => {
     const fetchData = async () => {

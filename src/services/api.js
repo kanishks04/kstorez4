@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { Product } from '@/contexts/CartContext';
 
 const API_BASE_URL = 'https://fakestoreapi.com';
 
@@ -10,31 +9,31 @@ const api = axios.create({
 
 export const apiService = {
   // Get all products
-  getAllProducts: async (): Promise<Product[]> => {
+  getAllProducts: async () => {
     const response = await api.get('/products');
     return response.data;
   },
 
   // Get products by category
-  getProductsByCategory: async (category: string): Promise<Product[]> => {
+  getProductsByCategory: async (category) => {
     const response = await api.get(`/products/category/${category}`);
     return response.data;
   },
 
   // Get single product
-  getProduct: async (id: number): Promise<Product> => {
+  getProduct: async (id) => {
     const response = await api.get(`/products/${id}`);
     return response.data;
   },
 
   // Get all categories
-  getCategories: async (): Promise<string[]> => {
+  getCategories: async () => {
     const response = await api.get('/products/categories');
     return response.data;
   },
 
   // Get limited products (for featured section)
-  getFeaturedProducts: async (limit: number = 8): Promise<Product[]> => {
+  getFeaturedProducts: async (limit = 8) => {
     const response = await api.get(`/products?limit=${limit}`);
     return response.data;
   },

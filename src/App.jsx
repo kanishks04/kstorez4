@@ -7,14 +7,14 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import { CartProvider } from "@/contexts/CartContext";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import Home from "./pages/Home";
-import Products from "./pages/Products";
-import Cart from "./pages/Cart";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
-import Contact from "./pages/Contact";
-import About from "./pages/About";
-import NotFound from "./pages/NotFound";
+import Home from "./pages/Home.jsx";
+import Products from "./pages/Products.jsx";
+import Cart from "./pages/Cart.jsx";
+import Login from "./pages/Login.jsx";
+import Signup from "./pages/Signup.jsx";
+import Contact from "./pages/Contact.jsx";
+import About from "./pages/About.jsx";
+import NotFound from "./pages/NotFound.jsx";
 
 const queryClient = new QueryClient();
 

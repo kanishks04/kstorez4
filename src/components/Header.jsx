@@ -4,7 +4,7 @@ import { ShoppingBag, User, LogOut, Menu } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useCart } from '@/contexts/CartContext';
 import { Button } from '@/components/ui/button';
-const Header: React.FC = () => {
+const Header = () => {
   const {
     user,
     logout

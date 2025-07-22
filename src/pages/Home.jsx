@@ -3,14 +3,13 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, TrendingUp } from 'lucide-react';
 import Hero from '@/components/Hero';
 import ProductCard from '@/components/ProductCard';
-import { Product } from '@/contexts/CartContext';
 import { apiService } from '@/services/api';
 import { Button } from '@/components/ui/button';
 
-const Home: React.FC = () => {
-  const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
+const Home = () => {
+  const [featuredProducts, setFeaturedProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchFeaturedProducts = async () => {

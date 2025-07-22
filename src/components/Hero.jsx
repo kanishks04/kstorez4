@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Laptop, Headphones, BookOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-const Hero: React.FC = () => {
+const Hero = () => {
   return (
     <section className="relative overflow-hidden">
       {/* Main Hero */}

@@ -1,15 +1,10 @@
 import React from 'react';
 import { Star, ShoppingCart } from 'lucide-react';
-import { Product } from '@/contexts/CartContext';
 import { useCart } from '@/contexts/CartContext';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 
-interface ProductCardProps {
-  product: Product;
-}
-
-const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+const ProductCard = ({ product }) => {
   const { addToCart } = useCart();
   const { toast } = useToast();
 
@@ -21,7 +16,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     });
   };
 
-  const truncateText = (text: string, length: number) => {
+  const truncateText = (text, length) => {
     return text.length > length ? text.substring(0, length) + '...' : text;
   };
 

@@ -1,27 +1,25 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Mail, Lock, User, Eye, EyeOff } from 'lucide-react';
+import { Mail, Lock, Eye, EyeOff } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 
-const Signup: React.FC = () => {
-  const [name, setName] = useState('');
+const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { signup } = useAuth();
+  const { login } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
-    if (!name || !email || !password || !confirmPassword) {
+    if (!email || !password) {
       toast({
         title: "Validation Error",
         description: "Please fill in all fields.",
@@ -39,46 +37,28 @@ const Signup: React.FC = () => {
       return;
     }
 
-    if (password.length < 6) {
-      toast({
-        title: "Validation Error",
-        description: "Password must be at least 6 characters long.",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      toast({
-        title: "Validation Error",
-        description: "Passwords do not match.",
-        variant: "destructive",
-      });
-      return;
-    }
-
     setLoading(true);
     
     try {
-      const success = await signup(email, password, name);
+      const success = await login(email, password);
       
       if (success) {
         toast({
-          title: "Account created!",
-          description: "Welcome to KSStorez! You can start shopping now.",
+          title: "Welcome back!",
+          description: "You have successfully logged in.",
         });
         navigate('/', { replace: true });
       } else {
         toast({
-          title: "Signup Failed",
-          description: "An error occurred during signup. Please try again.",
+          title: "Login Failed",
+          description: "Invalid email or password. Please try again.",
           variant: "destructive",
         });
       }
     } catch (error) {
       toast({
-        title: "Signup Failed",
-        description: "An error occurred during signup. Please try again.",
+        title: "Login Failed",
+        description: "An error occurred during login. Please try again.",
         variant: "destructive",
       });
     } finally {
@@ -94,33 +74,15 @@ const Signup: React.FC = () => {
             KSStorez
           </Link>
           <h2 className="mt-6 text-3xl font-bold text-foreground">
-            Create Account
+            Welcome Back
           </h2>
           <p className="mt-2 text-muted-foreground">
-            Join KSStorez and start shopping for all your student needs
+            Sign in to your account to continue shopping
           </p>
         </div>
 
         <div className="card-elevated p-8">
           <form className="space-y-6" onSubmit={handleSubmit}>
-            <div>
-              <Label htmlFor="name">Full Name</Label>
-              <div className="mt-1 relative">
-                <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-                <Input
-                  id="name"
-                  name="name"
-                  type="text"
-                  autoComplete="name"
-                  required
-                  placeholder="Enter your full name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  className="pl-10"
-                />
-              </div>
-            </div>
-
             <div>
               <Label htmlFor="email">Email Address</Label>
               <div className="mt-1 relative">
@@ -147,9 +109,9 @@ const Signup: React.FC = () => {
                   id="password"
                   name="password"
                   type={showPassword ? 'text' : 'password'}
-                  autoComplete="new-password"
+                  autoComplete="current-password"
                   required
-                  placeholder="Create a password"
+                  placeholder="Enter your password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="pl-10 pr-10"
@@ -164,21 +126,11 @@ const Signup: React.FC = () => {
               </div>
             </div>
 
-            <div>
-              <Label htmlFor="confirmPassword">Confirm Password</Label>
-              <div className="mt-1 relative">
-                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-                <Input
-                  id="confirmPassword"
-                  name="confirmPassword"
-                  type={showPassword ? 'text' : 'password'}
-                  autoComplete="new-password"
-                  required
-                  placeholder="Confirm your password"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="pl-10"
-                />
+            <div className="flex items-center justify-between">
+              <div className="text-sm">
+                <a href="#" className="text-primary hover:text-primary/80">
+                  Forgot your password?
+                </a>
               </div>
             </div>
 
@@ -188,33 +140,31 @@ const Signup: React.FC = () => {
               size="lg"
               disabled={loading}
             >
-              {loading ? 'Creating Account...' : 'Create Account'}
+              {loading ? 'Signing in...' : 'Sign In'}
             </Button>
 
             <div className="text-center">
               <p className="text-muted-foreground">
-                Already have an account?{' '}
-                <Link to="/login" className="text-primary hover:text-primary/80 font-medium">
-                  Sign in here
+                Don't have an account?{' '}
+                <Link to="/signup" className="text-primary hover:text-primary/80 font-medium">
+                  Sign up here
                 </Link>
               </p>
             </div>
           </form>
         </div>
 
-        <div className="text-center text-xs text-muted-foreground">
-          By creating an account, you agree to our{' '}
-          <Link to="/terms" className="text-primary hover:underline">
-            Terms of Service
-          </Link>{' '}
-          and{' '}
-          <Link to="/privacy" className="text-primary hover:underline">
-            Privacy Policy
-          </Link>
+        {/* Demo credentials */}
+        <div className="card-elevated p-4 bg-primary-light/50">
+          <p className="text-sm text-foreground font-medium mb-2">Demo Credentials:</p>
+          <p className="text-sm text-muted-foreground">
+            Email: student@college.edu<br />
+            Password: any password
+          </p>
         </div>
       </div>
     </div>
   );
 };
 
-export default Signup;
+export default Login;

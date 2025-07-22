@@ -1,36 +1,11 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-export interface Product {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  category: string;
-  image: string;
-  rating: {
-    rate: number;
-    count: number;
-  };
-}
+// Removed all TypeScript interfaces and types
 
-export interface CartItem extends Product {
-  quantity: number;
-}
+const CartContext = createContext(undefined);
 
-interface CartContextType {
-  items: CartItem[];
-  addToCart: (product: Product) => void;
-  removeFromCart: (productId: number) => void;
-  updateQuantity: (productId: number, quantity: number) => void;
-  clearCart: () => void;
-  getTotalPrice: () => number;
-  getTotalItems: () => number;
-}
-
-const CartContext = createContext<CartContextType | undefined>(undefined);
-
-export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [items, setItems] = useState<CartItem[]>([]);
+export const CartProvider = ({ children }) => {
+  const [items, setItems] = useState([]);
 
   useEffect(() => {
     // Load cart from localStorage on startup
@@ -45,7 +20,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     localStorage.setItem('ksStorezCart', JSON.stringify(items));
   }, [items]);
 
-  const addToCart = (product: Product) => {
+  const addToCart = (product) => {
     setItems(currentItems => {
       const existingItem = currentItems.find(item => item.id === product.id);
       
@@ -61,11 +36,11 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     });
   };
 
-  const removeFromCart = (productId: number) => {
+  const removeFromCart = (productId) => {
     setItems(currentItems => currentItems.filter(item => item.id !== productId));
   };
 
-  const updateQuantity = (productId: number, quantity: number) => {
+  const updateQuantity = (productId, quantity) => {
     if (quantity <= 0) {
       removeFromCart(productId);
       return;

@@ -6,12 +6,12 @@ import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 
-const Cart: React.FC = () => {
+const Cart = () => {
   const { items, updateQuantity, removeFromCart, getTotalPrice, clearCart } = useCart();
   const { user } = useAuth();
   const { toast } = useToast();
 
-  const handleQuantityChange = (productId: number, newQuantity: number) => {
+  const handleQuantityChange = (productId, newQuantity) => {
     if (newQuantity < 1) {
       removeFromCart(productId);
       toast({
@@ -23,7 +23,7 @@ const Cart: React.FC = () => {
     }
   };
 
-  const handleRemoveItem = (productId: number) => {
+  const handleRemoveItem = (productId) => {
     removeFromCart(productId);
     toast({
       title: "Item removed",
@@ -40,7 +40,6 @@ const Cart: React.FC = () => {
       });
       return;
     }
-    
     // In a real app, this would navigate to checkout
     toast({
       title: "Checkout",
